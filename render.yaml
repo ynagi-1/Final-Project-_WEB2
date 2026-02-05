@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: auction-app
+    env: node
+    plan: free
+    region: oregon
+    branch: main
+    buildCommand: ""
+    startCommand: "npm start"
