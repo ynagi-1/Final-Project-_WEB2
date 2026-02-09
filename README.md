@@ -1,21 +1,19 @@
-# 🏛️ Auction App v2.0 - Extended Edition
+#  Auction  - Extended Edition
 
 A full-featured real-time auction platform with bidding system, automatic auction closing, and image support.
 
 ## ✨ Features
 
-- 🔐 JWT Authentication & Authorization
-- 👥 Role-Based Access Control (User & Admin)
-- 📦 Complete CRUD for Lots and Categories
-- 💰 Real-time Bidding System
-- ⏰ Automatic Auction Closing
-- 🖼️ Image Upload Support (URL & Base64)
-- 📊 Bid History Tracking
-- ⏱️ Live Countdown Timers
-- 🏆 Winner Determination
-- 📱 Responsive Web Interface
+-  JWT Authentication & Authorization
+-  Role-Based Access Control (User & Admin)
+-  Complete CRUD for Lots and Categories
+-  Real-time Bidding System
+-  Automatic Auction Closing
+-  Image Upload Support
+-  Bid History Tracking
+-  Live Countdown Timers
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 **Backend:**
 - Node.js & Express.js
@@ -24,34 +22,22 @@ A full-featured real-time auction platform with bidding system, automatic auctio
 - bcryptjs for password hashing
 - Cron jobs for auto-closing
 
-**Frontend:**
-- HTML5/CSS3
-- Vanilla JavaScript
-- Real-time countdown timers
-
 ## 📦 Prerequisites
 
 Before you begin, ensure you have the following installed:
 
-- **Node.js** (v14 or higher) - [Download](https://nodejs.org/)
-- **MongoDB** (v4 or higher) - [Download](https://www.mongodb.com/try/download/community)
-- **Git** - [Download](https://git-scm.com/)
+- **Node.js** - [Download]
+- **MongoDB**  - [Download](https://www.mongodb.com/try/download/community) or MongoDB Atlas
 
-### Check Installation
 
-```bash
-node --version    # Should show v14.x or higher
-npm --version     # Should show v6.x or higher
-mongod --version  # Should show MongoDB version
-```
 
-## 🚀 Installation & Setup
+## Installation & Setup
 
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/auction-app-v2.git
-cd auction-app-v2
+git clone https://github.com/ynagi-1/Final-Project-_WEB2.git
+cd (project name)
 ```
 
 ### Step 2: Install Dependencies
@@ -72,18 +58,10 @@ This will install all required packages:
 
 Create a `.env` file in the root directory:
 
-```bash
-# On Windows (PowerShell)
-Copy-Item .env.example .env
-
-# On macOS/Linux
-cp .env.example .env
-```
-
 Edit `.env` file with your settings:
 
 ```env
-MONGODB_URI=mongodb://localhost:27017/auction_db
+MONGODB_URI={mongodb://localhost:27017/auction_db} or {use mongodb Atlas}
 JWT_SECRET=your_super_secret_jwt_key_change_this_in_production
 PORT=3000
 NODE_ENV=development
@@ -91,45 +69,6 @@ NODE_ENV=development
 
 **Important:** Change `JWT_SECRET` to a long, random string for security!
 
-### Step 4: Start MongoDB
-
-#### Windows:
-```bash
-# If MongoDB is installed as a Windows Service
-net start MongoDB
-
-# Or run manually
-mongod
-```
-
-#### macOS (with Homebrew):
-```bash
-brew services start mongodb-community
-```
-
-#### Linux:
-```bash
-sudo systemctl start mongod
-sudo systemctl enable mongod  # Enable auto-start
-```
-
-### Step 5: Verify MongoDB Connection
-
-```bash
-# Open MongoDB shell
-mongosh
-
-# Or for older versions
-mongo
-```
-
-You should see:
-```
-MongoDB shell version v6.x.x
-connecting to: mongodb://127.0.0.1:27017/
-```
-
-Type `exit` to leave the shell.
 
 ## ▶️ Running the Application
 
@@ -143,16 +82,6 @@ npm run dev
 
 ```bash
 npm start
-```
-
-You should see:
-```
-🕒 Starting cron jobs...
-✅ Auto-closed 0 expired lot(s) at 2025-02-05T10:00:00.000Z
-MongoDB Connected: localhost
-🚀 Server running on port 3000
-📍 Environment: development
-🌐 API Base URL: http://localhost:3000/api
 ```
 
 ## 🌐 Access the Application
@@ -395,81 +324,6 @@ Frontend updates every second:
   ]
 }
 ```
-
-## 🐛 Troubleshooting
-
-### MongoDB Not Starting
-
-**Windows:**
-```bash
-# Check if service exists
-sc query MongoDB
-
-# Start service
-net start MongoDB
-
-# If not installed as service, run manually:
-mongod --dbpath C:\data\db
-```
-
-**macOS:**
-```bash
-# Check status
-brew services list
-
-# Start service
-brew services start mongodb-community
-
-# Check logs
-tail -f /usr/local/var/log/mongodb/mongo.log
-```
-
-**Linux:**
-```bash
-# Check status
-sudo systemctl status mongod
-
-# Start service
-sudo systemctl start mongod
-
-# Check logs
-sudo journalctl -u mongod
-```
-
-### Port 3000 Already in Use
-
-Change port in `.env`:
-```env
-PORT=5000
-```
-
-Or kill process on port 3000:
-
-**Windows:**
-```bash
-netstat -ano | findstr :3000
-taskkill /PID <PID> /F
-```
-
-**macOS/Linux:**
-```bash
-lsof -ti:3000 | xargs kill -9
-```
-
-### Database Connection Failed
-
-1. Check if MongoDB is running:
-   ```bash
-   mongosh
-   ```
-
-2. Verify `MONGODB_URI` in `.env`:
-   ```env
-   MONGODB_URI=mongodb://localhost:27017/auction_db
-   ```
-
-3. Check MongoDB logs for errors
-
 ### JWT Token Errors
 
 1. **"Invalid token"**
@@ -479,87 +333,3 @@ lsof -ti:3000 | xargs kill -9
 2. **"No token provided"**
    - Make sure to include `Authorization: Bearer TOKEN` header
    - Check that token is saved in localStorage
-
-### Auto-Close Not Working
-
-1. Check server console for cron job messages:
-   ```
-   🕒 Starting cron jobs...
-   ```
-
-2. Create test lot with end date 2 minutes in future
-
-3. Wait and check console for:
-   ```
-   ✅ Auto-closed 1 expired lot(s) at ...
-   ```
-
-## 📊 Database Management
-
-### View Data in MongoDB
-
-```bash
-# Open MongoDB shell
-mongosh
-
-# Switch to database
-use auction_db
-
-# View all collections
-show collections
-
-# View users
-db.users.find().pretty()
-
-# View lots
-db.lots.find().pretty()
-
-# View categories
-db.categories.find().pretty()
-
-# Count documents
-db.lots.countDocuments()
-```
-
-### Clear All Data (Reset)
-
-```bash
-mongosh
-
-use auction_db
-
-db.users.deleteMany({})
-db.lots.deleteMany({})
-db.categories.deleteMany({})
-```
-
-## 📝 Environment Variables
-
-| Variable | Description | Default | Required |
-|----------|-------------|---------|----------|
-| `MONGODB_URI` | MongoDB connection string | `mongodb://localhost:27017/auction_db` | ✅ |
-| `JWT_SECRET` | Secret key for JWT signing | - | ✅ |
-| `PORT` | Server port | `3000` | ❌ |
-| `NODE_ENV` | Environment mode | `development` | ❌ |
-
-## 🔒 Security Notes
-
-- ✅ Passwords are hashed with bcryptjs (10 salt rounds)
-- ✅ JWT tokens expire after 7 days
-- ✅ CORS enabled for cross-origin requests
-- ✅ Input validation on all endpoints
-- ✅ Role-based access control (RBAC)
-- ⚠️ Change `JWT_SECRET` in production!
-- ⚠️ Use HTTPS in production
-- ⚠️ Enable MongoDB authentication in production
-
-## 📄 License
-
-MIT License - feel free to use for learning and commercial projects.
-
----
-
-**Made with ❤️ for learning full-stack development**
-
-**Version:** 2.0.0  
-**Last Updated:** February 2025
